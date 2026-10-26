@@ -1,0 +1,26 @@
+{
+  "name": "shop-world",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev:storefront": "pnpm --filter storefront dev",
+    "dev:admin": "pnpm --filter admin dev",
+    "dev:backend": "pnpm --filter backend start:dev",
+    "build:all": "pnpm -r build",
+    "db:migrate": "pnpm --filter backend prisma migrate dev",
+    "db:seed": "pnpm --filter backend db:seed"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "onlyBuiltDependencies": [
+    "bcrypt",
+    "prisma",
+    "@prisma/client",
+    "@prisma/engines"
+  ]
+}

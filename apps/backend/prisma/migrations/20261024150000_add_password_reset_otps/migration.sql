@@ -1,0 +1,1 @@
+-- Intentionally empty: the following initial_schema migration creates this table.
