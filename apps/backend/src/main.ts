@@ -5,13 +5,17 @@ import { AppModule } from './app.module.js';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const allowedOrigins = [
+  const allowedOrigins = new Set([
     'https://neomart-website.vercel.app',
     'https://neomart-admin.vercel.app',
     'http://localhost:3000',
     'http://localhost:3001',
-  ];
-  app.enableCors({ origin: allowedOrigins });
+  ]);
+  app.enableCors({
+    origin: (origin, callback) => {
+      callback(null, !origin || allowedOrigins.has(origin));
+    },
+  });
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
   const PORT = process.env.PORT || 5000;
