@@ -91,8 +91,9 @@ export class OrdersService {
     const totalAmount = Math.max(0, subtotal + deliveryFee - discount);
     const orderNumber = `#NM-${randomUUID().slice(0, 12).toUpperCase()}`;
     const paymentReference = `NM-${randomUUID().replace(/-/g, '')}`;
-    const callbackUrl =
-      `${process.env.STOREFRONT_URL ?? 'http://localhost:3000'}/checkout/verify`;
+    const storefrontUrl =
+      process.env.STOREFRONT_URL || 'https://neomart-website.vercel.app';
+    const callbackUrl = new URL('/checkout/verify', storefrontUrl).toString();
 
     const order = await this.prisma.$transaction(async (tx) => {
       const address =

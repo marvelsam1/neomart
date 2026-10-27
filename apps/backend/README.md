@@ -35,8 +35,10 @@ $ pnpm install
 
 Set `FLUTTERWAVE_SECRET_KEY` in `apps/backend/.env` using a Flutterwave test key
 for development and a live secret key for production. Set `STOREFRONT_URL` to
-the website's origin (for example, `http://localhost:3000`) so Flutterwave can
-return customers to `/checkout/verify`. Never expose or commit the secret key.
+the website's origin (for example, `http://localhost:3000` locally or
+`https://neomart-website.vercel.app` in production) so Flutterwave can return
+customers to `/checkout/verify`. The production website URL is used as the
+fallback if `STOREFRONT_URL` is unset. Never expose or commit the secret key.
 
 Apply the Prisma migrations before running the backend. Checkout creates a
 pending order, redirects to Flutterwave, and verifies the payment server-side
