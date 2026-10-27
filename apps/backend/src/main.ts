@@ -5,10 +5,12 @@ import { AppModule } from './app.module.js';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const allowedOrigins = process.env.CORS_ORIGINS
-    ?.split(',')
-    .map((origin) => origin.trim())
-    .filter(Boolean) ?? ['http://localhost:3000', 'http://localhost:3001'];
+  const allowedOrigins = [
+    'https://neomart-website.vercel.app',
+    'https://neomart-admin.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ];
   app.enableCors({ origin: allowedOrigins });
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
